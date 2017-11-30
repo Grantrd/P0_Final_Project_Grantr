@@ -22,6 +22,11 @@ def hero(x, y):
 
 x = (display_width  * 0.45)
 y = (display_height * 0.80)
+
+x_change = 0
+
+x += x_change
+
 crashed = False
 while not crashed:
 
@@ -29,6 +34,15 @@ while not crashed:
         if event.type == pygame.QUIT:
             crashed = True
         print(event)
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.k_LEFT:
+                x_change = -5
+            if event.key == pygame.k_RIGHT:
+                x_change = 5
+        if event.type == pygame.KEYUP:
+            if event.type == pygame.k_LEFT or event.type == pygame.k_LEFT:
+                x_change = 0
 
     gameDisplay.fill(white)
     hero(x, y)
