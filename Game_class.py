@@ -66,7 +66,7 @@ while not crashed:
         y = floor
 
     """platforms"""
-    one = Platform(100, 300, 100)
+    one = Platform(100, 300, 115)
     floor = one.solid(display_height, x, y)
 
     """gameScreen"""
