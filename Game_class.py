@@ -1,7 +1,9 @@
-from pygame import*
+import pygame
+from pygame import *
 from hero_class import*
 from platform_class import*
-Clock = pygame.time.Clock()
+import random
+from enemy_class import *
 
 """setup Screen"""
 pygame.init()
@@ -20,10 +22,10 @@ gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('penguin_ario')
 clock = pygame.time.Clock()
 floor = int(display_height * 0.78)
-hero = Hero('animal.png')
+
 """enemy - to be class"""
-enemy = pygame.image.load('enemy.png')
-#gameDisplay.blit(enemy, (x-100, y))
+hero = Hero('animal.png', gameDisplay)
+snowman = Enemy('enemy.png', gameDisplay)
 
 
 x = int(display_width * 0.45)
@@ -62,6 +64,8 @@ while not crashed:
     """character jumping and moving"""
     x += x_change
     y += y_change
+    z = x-(random.randint(1, 100))
+    m = y-(random.randint(-50, 50))
     if y >= floor:
         jump = False
     if y < floor:
@@ -72,8 +76,8 @@ while not crashed:
     """platforms, in progress"""
     one = Platform(100, 300, 115, display_height, floor, x, y, gameDisplay)
     two = Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
-    floor = one.solid()
     floor = two.solid()
+    floor = one.solid()
     """gameScreen"""
 
     """background"""
@@ -84,8 +88,16 @@ while not crashed:
     two.draw(black, 5)
 
     """actors"""
-    gameDisplay.blit(enemy, (x-100, y))
-    hero.display(x, y, gameDisplay)
+    hero.display(x, y)
+    snowman.display(snowman.track(x))
+    if hero.crash(snowman.track(x), snowman.y) == "True":
+        snowman.y = -100
+    if hero.crash(snowman.track(x), snowman.y):
+        hero.y = -100
+        floor = - 100
+    #else:
+        #print("miss")
+
 
     """refresh screen"""
     pygame.display.update()
