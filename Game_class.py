@@ -27,6 +27,7 @@ x_change = 0
 jump = False
 y_change = 0
 
+"""game loop"""
 crashed = False
 
 while not crashed:
@@ -42,10 +43,10 @@ while not crashed:
                 x_change = -5
             if event.key == pygame.K_RIGHT:
                 x_change = 5
-            if event.key == pygame.K_SPACE:
-                if int(hero.y - floor) <= 50:
-                    y_change = -5
-                y_change = -5
+            if y >= (floor - 10):
+                if event.key == pygame.K_SPACE:
+                    if not jump:
+                        y_change = -10
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -54,6 +55,7 @@ while not crashed:
                 if jump:
                     y_change = 5
 
+    """character jumping and moving"""
     x += x_change
     y += y_change
     if y >= floor:
@@ -62,18 +64,12 @@ while not crashed:
         jump = True
     if y > floor:
         y = floor
-    """platform, not working"""
+
+    """platforms"""
     one = Platform(100, 300, 100)
-    if x >= one.x:
-        if x <= one.x + one.length:
-            if y <= one.y:
-                floor = one.y
-        elif x > (one.x +one.length):
-            floor = int(display_height * 0.78)
-    elif x < one.x:
-        floor = int(display_height * 0.78)
+    floor = one.solid(display_height, x, y)
 
-
+    """gameScreen"""
     gameDisplay.fill(white)
     gameDisplay.blit(background, [0, 0])
     pygame.draw.line(gameDisplay, white, one.start(), one.end(), 5)
@@ -82,3 +78,4 @@ while not crashed:
     clock.tick(60)
 
 pygame.quit()
+"""end of game loop"""
