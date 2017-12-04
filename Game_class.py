@@ -36,7 +36,7 @@ while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
-        print(event)
+        #print(event)
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
@@ -66,15 +66,24 @@ while not crashed:
         y = floor
 
     """platforms"""
-    one = Platform(100, 300, 115)
-    floor = one.solid(display_height, x, y)
-
+    one = Platform(100, 300, 115, display_height, floor, x, y)
+    floor = one.solid()
+    two = Platform(200, 400, 115, display_height, floor, x, y)
     """gameScreen"""
+
+    """background"""
     gameDisplay.fill(white)
     gameDisplay.blit(background, [0, 0])
-    pygame.draw.line(gameDisplay, white, one.start(), one.end(), 5)
+    """platform"""
+    one.draw(gameDisplay, white, 5)
+
+    """actors"""
     hero.display(x, y, gameDisplay)
+
+    """refresh screen"""
     pygame.display.update()
+
+    """clock for ...something later"""
     clock.tick(60)
 
 pygame.quit()
