@@ -1,6 +1,7 @@
 from pygame import*
 from hero_class import*
 from platform_class import*
+Clock = pygame.time.Clock()
 
 """setup Screen"""
 pygame.init()
@@ -38,19 +39,15 @@ while not crashed:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                #if not jump:
                 x_change = -5
             if event.key == pygame.K_RIGHT:
-                #if not jump:
                 x_change = 5
-            if y >= (floor - 10):
-                if event.key == pygame.K_SPACE:
-                    if not jump:
-                        y_change = -10
-
+            if event.key == pygame.K_SPACE:
+                if int(hero.y - floor) <= 50:
+                    y_change = -5
+                y_change = -5
 
         if event.type == pygame.KEYUP:
-
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 x_change = 0
             if event.key == pygame.K_SPACE:
@@ -79,9 +76,8 @@ while not crashed:
 
     gameDisplay.fill(white)
     gameDisplay.blit(background, [0, 0])
+    pygame.draw.line(gameDisplay, white, one.start(), one.end(), 5)
     hero.display(x, y, gameDisplay)
-    pygame.draw.line(gameDisplay, white, (one.x + 65, (one.y + 85)), ((one.x + one.length + 20), one.y + 85), 1)
-    #print(one.x, one.y)
     pygame.display.update()
     clock.tick(60)
 
