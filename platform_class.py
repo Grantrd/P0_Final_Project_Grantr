@@ -3,7 +3,7 @@ from pygame import *
 
 
 class Platform:
-    def __init__(self, x, y, length, display_height, floor, z, m):
+    def __init__(self, x, y, length, display_height, floor, z, m, canvas):
         self.x = x
         self.y = y
         self.length = length
@@ -11,6 +11,7 @@ class Platform:
         self.floor = floor
         self.z = z
         self.m = m
+        self.canvas = canvas
 
     def start(self):
         return ((self.x + 70), (self.y + 85))
@@ -19,7 +20,6 @@ class Platform:
         return ((self.x + self.length + 15), (self.y + 85))
 
     def solid(self):
-        print(self.x, self.z)
         if self.z >= self.x:
             if self.z <= self.x + self.length:
                 if self.m <= self.y:
@@ -31,5 +31,5 @@ class Platform:
         floor = self.floor
         return floor
 
-    def draw(self, canvas, color, width):
-        pygame.draw.line(canvas, color, self.start(), self.end(), width)
+    def draw(self, color, width):
+        pygame.draw.line(self.canvas, color, self.start(), self.end(), width)

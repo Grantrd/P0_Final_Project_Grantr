@@ -17,10 +17,15 @@ green = (0, 255, 0)
 
 """setup Game"""
 gameDisplay = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption('penguin')
+pygame.display.set_caption('penguin_ario')
 clock = pygame.time.Clock()
 floor = int(display_height * 0.78)
 hero = Hero('animal.png')
+"""enemy - to be class"""
+enemy = pygame.image.load('enemy.png')
+#gameDisplay.blit(enemy, (x-100, y))
+
+
 x = int(display_width * 0.45)
 y = floor
 x_change = 0
@@ -36,7 +41,6 @@ while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
-        #print(event)
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
@@ -65,19 +69,22 @@ while not crashed:
     if y > floor:
         y = floor
 
-    """platforms"""
-    one = Platform(100, 300, 115, display_height, floor, x, y)
+    """platforms, in progress"""
+    one = Platform(100, 300, 115, display_height, floor, x, y, gameDisplay)
+    two = Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
     floor = one.solid()
-    two = Platform(200, 400, 115, display_height, floor, x, y)
+    floor = two.solid()
     """gameScreen"""
 
     """background"""
     gameDisplay.fill(white)
     gameDisplay.blit(background, [0, 0])
     """platform"""
-    one.draw(gameDisplay, white, 5)
+    one.draw(white, 5)
+    two.draw(black, 5)
 
     """actors"""
+    gameDisplay.blit(enemy, (x-100, y))
     hero.display(x, y, gameDisplay)
 
     """refresh screen"""
