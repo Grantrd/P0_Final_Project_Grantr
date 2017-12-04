@@ -66,21 +66,21 @@ while not crashed:
     if y > floor:
         y = floor
     """platform, not working"""
-    one = Platform(300, 300, 300)
+    one = Platform(100, 300, 100)
     if x >= one.x:
         if x <= one.x + one.length:
             if y <= one.y:
                 floor = one.y
         elif x > (one.x +one.length):
             floor = int(display_height * 0.78)
-    elif x < (one.x):
+    elif x < one.x:
         floor = int(display_height * 0.78)
 
 
     gameDisplay.fill(white)
     gameDisplay.blit(background, [0, 0])
     hero.display(x, y, gameDisplay)
-    pygame.draw.line(gameDisplay, black, (one.x, (one.y + 82)), ((one.x + one.length), one.y + 82), 5)
+    pygame.draw.line(gameDisplay, white, (one.x + 65, (one.y + 85)), ((one.x + one.length + 20), one.y + 85), 1)
     #print(one.x, one.y)
     pygame.display.update()
     clock.tick(60)
