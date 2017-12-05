@@ -78,11 +78,11 @@ while not crashed:
     two = platform_class.Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
     platform = [one, two]
     for i in range(len(platform)):
-        if platform[i].solid():
-            print(platform[i].solid())
-            floor = platform[i].solid().floor
-        # else:
-        #     floor = int(display_height * .78)
+        if x > platform[i].x & x < (platform[i].x + platform[i].length) & y < platform[i].y:
+            floor = platform[i].solid()
+        else:
+            print("False")
+            floor = int(display_height * 0.78)
     """gameScreen"""
 
     """background"""

@@ -20,25 +20,15 @@ class Platform:
         return ((self.x + self.length + 15), (self.y + 85))
 
     def solid(self):
-        is_solid = False
         if self.z < self.x:
-            is_solid = False
-            self.floor = int(self.height * .78)
+            self.floor = int(self.height * 0.78)
         elif self.z > (self.x + self.length):
-            is_solid = False
-            self.floor = int(self.height * .78)
+            self.floor = int(self.height * 0.78)
         elif self.m > self.y:
-            is_solid = False
-            self.floor = int(self.height * .78)
+            self.floor = int(self.height * 0.78)
         else:
-            is_solid = True
             self.floor = self.y
-        # else:
-        #     state = [False, int(self.height * 0.78)]
-        # state.append(is_solid)
-        # state.append(self.floor)
-        # print(state)
-        return is_solid
+        return self.floor
 
     def draw(self, colour, width):
         pygame.draw.line(self.canvas, colour, self.start(), self.end(), width)
