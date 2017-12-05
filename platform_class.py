@@ -22,20 +22,19 @@ class Platform:
     def solid(self):
         state = []
         is_solid = False
-        if self.z >= self.x:
-            if self.z <= self.x + self.length:
-                if self.m <= self.y:
+        if self.z > self.x:
+            if self.z < self.x + self.length:
+                if self.m < self.y:
                     self.floor = self.y
                     is_solid = True
+                else:
+                    self.floor = int(self.height * 0.78)
+                    is_solid = False
             elif self.m > (self.x + self.length):
                 self.floor = int(self.height * 0.78)
                 is_solid = False
-        elif self.z < self.x:
-            self.floor = int(self.height * 0.78)
-            is_solid = False
-        floor = self.floor
         state.append(is_solid)
-        state.append(floor)
+        state.append(self.floor)
         return state
 
     def draw(self, colour, width):
