@@ -1,7 +1,7 @@
 import pygame
 from pygame import *
 from hero_class import*
-from platform_class import*
+import platform_class
 import random
 from enemy_class import *
 
@@ -24,7 +24,7 @@ clock = pygame.time.Clock()
 floor = int(display_height * 0.78)
 
 """enemy - to be class"""
-hero = Hero('animal.png', gameDisplay)
+hero = platform_class.Hero('animal.png', gameDisplay)
 snowman = Enemy('enemy.png', gameDisplay)
 
 
@@ -74,10 +74,14 @@ while not crashed:
         y = floor
 
     """platforms, in progress"""
-    one = Platform(100, 300, 115, display_height, floor, x, y, gameDisplay)
-    two = Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
-    floor = two.solid()
-    floor = one.solid()
+    one = platform_class.Platform(100, 300, 115, display_height, floor, x, y, gameDisplay)
+    two = platform_class.Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
+    platform = [one, two]
+    for i in range(len(platform)):
+        if platform[i].solid()
+            floor = platform[i].solid()[1]
+        else:
+            floor = int(display_height * .78)
     """gameScreen"""
 
     """background"""

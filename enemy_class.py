@@ -19,9 +19,9 @@ class Enemy:
         change = 0
         if self.x != x:
             if self.x < x:
-                change = 1
+                change = (1/2)
             elif self.x > x:
-                change = -1
+                change = -(1/2)
             else:
                 change = 0
         self.x += change
