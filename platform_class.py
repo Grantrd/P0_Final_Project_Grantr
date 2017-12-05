@@ -24,29 +24,18 @@ class Platform:
         if self.z > self.x:
             if self.z < (self.x + self.length):
                 if self.m < self.y:
+                    self.floor = self.y
                     is_solid = True
                 elif self.m > self.y:
+                    self.floor = int(self.height * 0.78)
                     is_solid = False
             elif self.z > (self.x + self.length):
-                is_solid = False
-        else: # self.z < self.x:
-            is_solid = False
-        #print(is_solid)
-        return is_solid
-
-    def platformer(self):
-        if self.z > self.x:
-            if self.z < (self.x + self.length):
-                if self.m < self.y:
-                    self.floor = self.y
-                elif self.m > self.y:
-                    self.floor = int(self.height * 0.78)
-            elif self.z > (self.x + self.length):
                 self.floor = int(self.height * 0.78)
-        else: # self.z < self.x:
+                is_solid = False
+        elif self.z < self.x:
             self.floor = int(self.height * 0.78)
-        #print(self.floor)
-        return self.floor
+            is_solid = False
+        return [is_solid, self.floor]
 
     def draw(self, colour, width):
         pygame.draw.line(self.canvas, colour, self.start(), self.end(), width)

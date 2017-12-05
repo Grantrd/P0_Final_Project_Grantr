@@ -84,10 +84,10 @@ while not crashed:
     #     floor = two.y
     #if two.solid():
         #floor = two.platformer()
-    if not two.solid():
-        floor = one.platformer()
-    elif not one.solid():
-        floor = two.platformer()
+    # if not two.solid()[0]:
+    #     floor = one.solid()[1]
+    elif not one.solid()[0]:
+        floor = two.solid()[1]
 
     """gameScreen"""
 
