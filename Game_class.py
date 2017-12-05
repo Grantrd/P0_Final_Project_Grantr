@@ -76,13 +76,18 @@ while not crashed:
     """platforms, in progress"""
     one = platform_class.Platform(100, 300, 115, display_height, floor, x, y, gameDisplay)
     two = platform_class.Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
-    platform = [one, two]
-    for i in range(len(platform)):
-        if x > platform[i].x & x < (platform[i].x + platform[i].length) & y < platform[i].y:
-            floor = platform[i].solid()
-        else:
-            print("False")
-            floor = int(display_height * 0.78)
+    # if (not one.solid()) & (not two.solid()):
+    #     int(display_height * 0.78)
+    # if one.solid():
+    #     floor = one.y
+    # if two.solid():
+    #     floor = two.y
+    #if two.solid():
+        #floor = two.platformer()
+    if not one.solid():
+        floor = two.platformer()
+    elif not two.solid():
+        floor = one.platformer()
     """gameScreen"""
 
     """background"""

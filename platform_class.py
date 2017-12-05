@@ -20,14 +20,32 @@ class Platform:
         return ((self.x + self.length + 15), (self.y + 85))
 
     def solid(self):
-        if self.z < self.x:
+        is_solid = False
+        if self.z > self.x:
+            if self.z < (self.x + self.length):
+                if self.m < self.y:
+                    is_solid = True
+                elif self.m > self.y:
+                    is_solid = False
+            elif self.z > (self.x + self.length):
+                is_solid = False
+        else: # self.z < self.x:
+            is_solid = False
+        #print(is_solid)
+        return is_solid
+
+    def platformer(self):
+        if self.z > self.x:
+            if self.z < (self.x + self.length):
+                if self.m < self.y:
+                    self.floor = self.y
+                elif self.m > self.y:
+                    self.floor = int(self.height * 0.78)
+            elif self.z > (self.x + self.length):
+                self.floor = int(self.height * 0.78)
+        else: # self.z < self.x:
             self.floor = int(self.height * 0.78)
-        elif self.z > (self.x + self.length):
-            self.floor = int(self.height * 0.78)
-        elif self.m > self.y:
-            self.floor = int(self.height * 0.78)
-        else:
-            self.floor = self.y
+        #print(self.floor)
         return self.floor
 
     def draw(self, colour, width):
