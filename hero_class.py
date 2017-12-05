@@ -19,7 +19,7 @@ class Hero:
         x = enemy_x
         y = enemy_y
         #print("Y: " + str(self.y + 10), y, "X: " + str(self.x), x)
-        if int(self.y + 80) == int(y):
+        if int(self.y + ) == int(y):
             if int(self.x) == int(x):
                 return "True"
         elif int(self.y) == int(y):
