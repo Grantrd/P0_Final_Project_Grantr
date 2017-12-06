@@ -23,7 +23,6 @@ class Enemy:
                 change = -1
             else:
                 change = 0
-
         self.x += change
         return self.x
 
