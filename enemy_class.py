@@ -1,6 +1,5 @@
 import pygame
 
-
 class Enemy:
 
     def __init__(self, img, canvas):
@@ -20,7 +19,7 @@ class Enemy:
         if self.x != x:
             if self.x < x:
                 change = 1
-            if self.x > x:
+            elif self.x > x:
                 change = -1
             else:
                 change = 0
