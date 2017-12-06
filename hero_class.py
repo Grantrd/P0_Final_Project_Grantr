@@ -24,9 +24,9 @@ class Hero:
             if int(self.x) <= int(x + 70):
                 if int(self.x) >= int(x - 70):
                     return 1
-        elif int(self.y) == int(y - 100):
-            if int(self.x) <= int(x + 40):
-                if int(self.x) >= int(x - 40):
+        elif int(self.y) == int(y - 70):
+            if int(self.x) <= int(x + 50):
+                if int(self.x) >= int(x - 50):
                     return 2
 
     def game_over(self):
