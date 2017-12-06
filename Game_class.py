@@ -64,8 +64,8 @@ while not crashed:
     """character jumping and moving"""
     #x += x_change
     #y += y_change
-    z = x-(random.randint(1, 100))
-    m = y-(random.randint(-50, 50))
+    #z = x-(random.randint(1, 100))
+    #m = y-(random.randint(-50, 50))
     if hero.y >= floor:
         jump = False
     if hero.y < floor:
@@ -74,12 +74,16 @@ while not crashed:
         hero.y = floor
 
     """platforms, in progress"""
-    one = platform_class.Platform(100, 300, 115, display_height, floor, x, y, gameDisplay)
-    two = platform_class.Platform(200, 400, 115, display_height, floor, x, y, gameDisplay)
-    # if not two.solid()[0]:
-    #     floor = one.solid()[1]
-    #if not one.solid()[0]:
-    floor = one.solid()[1]
+    one = platform_class.Platform(100, 300, 115, gameDisplay)
+    two = platform_class.Platform(200, 400, 115, gameDisplay)
+
+    #print(hero.x, one.x, one.x+one.length, hero.y, one.y)
+    if hero.x > one.x and hero.x < (one.x + one.length) and hero.y <= one.y:
+        floor = one.y
+    elif hero.x > two.x and hero.x < (two.x + two.length) and hero.y <= two.y:
+        floor = two.y
+    else:
+        floor = 468
 
     """gameScreen"""
 
