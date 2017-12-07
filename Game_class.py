@@ -2,7 +2,6 @@ import pygame
 from pygame import *
 from hero_class import*
 import platform_class
-import random
 from enemy_class import *
 
 """setup Screen"""
@@ -26,8 +25,7 @@ floor = int(.84 * display_height)
 """enemy - to be class"""
 hero = platform_class.Hero('animal.png', gameDisplay, floor)
 snowman = Enemy('enemy.png', gameDisplay, display_height)
-
-
+"""setup screen"""
 x = int(display_width * 0.45)
 y = floor
 x_change = 0
@@ -63,10 +61,6 @@ while not crashed:
                     y_change = 5
 
     """character jumping and moving"""
-    #x += x_change
-    #y += y_change
-    #z = x-(random.randint(1, 100))
-    #m = y-(random.randint(-50, 50))
     if hero.y >= floor:
         jump = False
     if hero.y < floor:
@@ -80,21 +74,13 @@ while not crashed:
     two = platform_class.Platform(75, 407, 188, gameDisplay)
     platforms.append(one)
     platforms.append(two)
-    #for i in range(len(platforms)):
-    if platforms[0].solid(hero.x, hero.y, floor)[0]:
-        floor = platforms[0].solid(hero.x, hero.y, floor)[1]
-    if platforms[1].solid(hero.x, hero.y, floor)[0]:
-        floor = platforms[1].solid(hero.x, hero.y, floor)[1]
-    else:
-        floor = int(display_height * 0.84)
-    #print(hero.x, one.x, one.x+one.length, hero.y, one.y)
-    # if hero.x > one.x and hero.x < (one.x + one.length) and hero.y <= one.y:
-    #     floor = one.y
-    # elif hero.x > two.x and hero.x < (two.x + two.length) and hero.y <= two.y:
-    #     floor = two.y
-    # else:
-    #     floor = 468
-
+    for i in range(len(platforms)):
+        if platforms[i].solid(hero.x, hero.y, floor)[0]:
+            floor = platforms[i].solid(hero.x, hero.y, floor)[1]
+        elif platforms[i].solid(hero.x, hero.y, floor)[0]:
+            floor = platforms[i].solid(hero.x, hero.y, floor)[1]
+        else:
+            floor = int(display_height * 0.84)
     """gameScreen"""
 
     """background"""

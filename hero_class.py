@@ -20,7 +20,7 @@ class Hero:
                     self.y += 10
         return self.x, self.y
 
-    """lets the snowman and penguin kill eachother"""
+    """lets the snowman and penguin kill each other"""
     def crash(self, snowmanx, snowmany):
         x = snowmanx
         y = snowmany
@@ -40,6 +40,6 @@ class Hero:
         else:
             crashed = False
         return crashed
-
+    """Draws the hero on screen"""
     def display(self):
         self.canvas.blit(self.load, (self.x, self.y))
