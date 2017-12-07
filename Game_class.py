@@ -74,16 +74,23 @@ while not crashed:
         hero.y = floor
 
     """platforms, in progress"""
+    platforms = []
     one = platform_class.Platform(100, 300, 115, gameDisplay)
-    two = platform_class.Platform(200, 400, 115, gameDisplay)
-
+    two = platform_class.Platform(220, 380, 115, gameDisplay)
+    platforms.append(one)
+    platforms.append(two)
+    for i in range(len(platforms)):
+        if platforms[i].solid(hero.x, hero.y, floor)[0]:
+            floor = platforms[i].solid(hero.x, hero.y, floor)[1]
+        else:
+            floor = int(display_height * .78)
     #print(hero.x, one.x, one.x+one.length, hero.y, one.y)
-    if hero.x > one.x and hero.x < (one.x + one.length) and hero.y <= one.y:
-        floor = one.y
-    elif hero.x > two.x and hero.x < (two.x + two.length) and hero.y <= two.y:
-        floor = two.y
-    else:
-        floor = 468
+    # if hero.x > one.x and hero.x < (one.x + one.length) and hero.y <= one.y:
+    #     floor = one.y
+    # elif hero.x > two.x and hero.x < (two.x + two.length) and hero.y <= two.y:
+    #     floor = two.y
+    # else:
+    #     floor = 468
 
     """gameScreen"""
 
@@ -95,7 +102,8 @@ while not crashed:
     two.draw(black, 5)
 
     """actors... Acting"""
-    hero.display(x_change, y_change, floor, jump)
+    hero.jumpable(x_change, y_change, floor)
+    hero.display()
     snowman.display(snowman.x)
     snowman.track(hero.x)
     if hero.crash(snowman.x, snowman.y) == 1:
