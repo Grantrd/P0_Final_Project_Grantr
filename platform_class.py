@@ -19,15 +19,10 @@ class Platform:
 
     """Makes the floor solid"""
     def solid(self, x, y, height):
-        newfloor = int(height * .84)
-        is_solid = False
         if y <= self.y and self.x <= x <= (self.x + self.length):
-            newfloor = self.y
-            is_solid = True
+            return self.y
         elif self.x >= x or x >= (self.x + self.length) or y > self.y:
-            newfloor = int(height * .84)
-            is_solid = False
-        return is_solid, newfloor
+            return int(height * .84)
 
     """Draws the floor on screen"""
     def draw(self, colour, width):

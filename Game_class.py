@@ -44,9 +44,9 @@ while not crashed:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                x_change = -5
+                    x_change = -5
             if event.key == pygame.K_RIGHT:
-                x_change = 5
+                    x_change = 5
             if y >= (floor - 10):
                 if event.key == pygame.K_SPACE:
                     if not jump:
@@ -69,18 +69,17 @@ while not crashed:
         hero.y = floor
 
     """platforms, in progress"""
-    platforms = []
+    #platforms = []
     one = platform_class.Platform(324, 328, 185, gameDisplay)
     two = platform_class.Platform(75, 407, 188, gameDisplay)
-    platforms.append(one)
-    platforms.append(two)
-    for i in range(len(platforms)):
-        if platforms[i].solid(hero.x, hero.y, floor)[0]:
-            floor = platforms[i].solid(hero.x, hero.y, floor)[1]
-        elif platforms[i].solid(hero.x, hero.y, floor)[0]:
-            floor = platforms[i].solid(hero.x, hero.y, floor)[1]
-        else:
-            floor = int(display_height * 0.84)
+    #platforms.append(one)
+    #platforms.append(two)
+    if one.x <= hero.x <= (one.x + one.length) and hero.y <= one.y:
+        floor = one.solid(hero.x, hero.y, floor)
+    if two.x <= hero.x <= (two.x + two.length) and hero.y <= two.y :
+        floor = two.solid(hero.x, hero.y, floor)
+    else:
+        floor = int(display_height * .84)
     """gameScreen"""
 
     """background"""
