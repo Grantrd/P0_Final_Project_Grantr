@@ -13,9 +13,9 @@ class Hero:
     """Allows the player to jump"""
     def jumpable(self, x, y, floor):
         self.x += x
-        if (floor - 100) < (self.y + y):
+        if (floor - 130) < (self.y + y):
             self.y += y
-            if self.y == floor - 110:
+            if self.y == floor - 130:
                 if self.y < floor:
                     self.y += 10
         return self.x, self.y
