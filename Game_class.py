@@ -21,7 +21,7 @@ green = (0, 255, 0)
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('penguin_ario')
 clock = pygame.time.Clock()
-floor = 468
+floor = int(.78 * display_height)
 
 """enemy - to be class"""
 hero = platform_class.Hero('animal.png', gameDisplay)
@@ -50,9 +50,9 @@ while not crashed:
             if event.key == pygame.K_RIGHT:
                 x_change = 5
             if y >= (floor - 10):
-                if event.key == pygame.K_SPACE:
-                    if not jump:
-                        y_change = -10
+                    if event.key == pygame.K_SPACE:
+                        if not jump:
+                            y_change = -10
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -95,7 +95,7 @@ while not crashed:
     two.draw(black, 5)
 
     """actors... Acting"""
-    hero.display(x_change, y_change)
+    hero.display(x_change, y_change, floor, jump)
     snowman.display(snowman.x)
     snowman.track(hero.x)
     if hero.crash(snowman.x, snowman.y) == 1:

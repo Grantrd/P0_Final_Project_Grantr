@@ -11,9 +11,15 @@ class Hero:
         self.img = img
         self.load = pygame.image.load(self.img)
 
-    def display(self, x, y):
+    def display(self, x, y, floor, jump):
         self.x += x
-        self.y += y
+        if (floor - 100) < (self.y + y):
+            self.y += y
+            if self.y == floor - 90:
+                if self.y < floor:
+                    self.y = floor
+        elif self.y < floor and (self.y > self.y - 100):
+            self.y += + 10
         self.canvas.blit(self.load, (self.x, self.y))
         return self.x, self.y
     """work in progress"""
