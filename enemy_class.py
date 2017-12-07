@@ -2,12 +2,12 @@ import pygame
 
 class Enemy:
 
-    def __init__(self, img, canvas):
+    def __init__(self, img, canvas, height):
         self.canvas = canvas
         self.img = img
         self.load = pygame.image.load(self.img)
         self.x = 100
-        self.y = 468
+        self.y = int(height * 0.84)
 
     def display(self, x):
         self.x = x

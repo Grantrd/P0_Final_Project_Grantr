@@ -4,8 +4,8 @@ import pygame
 
 class Hero:
 
-    def __init__(self, img, canvas):
-        self.y = 486
+    def __init__(self, img, canvas,  floor):
+        self.y = floor
         self.x = 600
         self.canvas = canvas
         self.img = img

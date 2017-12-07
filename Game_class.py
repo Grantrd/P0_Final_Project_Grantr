@@ -21,11 +21,11 @@ green = (0, 255, 0)
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('penguin_ario')
 clock = pygame.time.Clock()
-floor = int(.78 * display_height)
+floor = int(.84 * display_height)
 
 """enemy - to be class"""
-hero = platform_class.Hero('animal.png', gameDisplay)
-snowman = Enemy('enemy.png', gameDisplay)
+hero = platform_class.Hero('animal.png', gameDisplay, floor)
+snowman = Enemy('enemy.png', gameDisplay, display_height)
 
 
 x = int(display_width * 0.45)
@@ -38,7 +38,7 @@ y_change = 0
 crashed = False
 
 while not crashed:
-    background = pygame.image.load('background.png').convert()
+    background = pygame.image.load('background2.png').convert()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -80,11 +80,13 @@ while not crashed:
     two = platform_class.Platform(220, 380, 115, gameDisplay)
     platforms.append(one)
     platforms.append(two)
-    for i in range(len(platforms)):
-        if platforms[i].solid(hero.x, hero.y, floor)[0]:
-            floor = platforms[i].solid(hero.x, hero.y, floor)[1]
-        else:
-            floor = int(display_height * .78)
+    #for i in range(len(platforms)):
+    if platforms[0].solid(hero.x, hero.y, floor)[0]:
+        floor = platforms[0].solid(hero.x, hero.y, floor)[1]
+    elif platforms[1].solid(hero.x, hero.y, floor)[0]:
+        floor = platforms[1].solid(hero.x, hero.y, floor)[1]
+    else:
+        floor = int(display_height * .78)
     #print(hero.x, one.x, one.x+one.length, hero.y, one.y)
     # if hero.x > one.x and hero.x < (one.x + one.length) and hero.y <= one.y:
     #     floor = one.y
