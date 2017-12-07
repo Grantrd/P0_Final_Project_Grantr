@@ -18,7 +18,7 @@ class Platform:
         return ((self.x + self.length + 15), (self.y + 85))
 
     def solid(self, x, y, floor):
-        if self.x < x < (self.x + self.length) and y <= self.y:
+        if y <= self.y and self.x <= x <= (self.x + self.length):
             floor = self.y
             is_solid = True
         else:

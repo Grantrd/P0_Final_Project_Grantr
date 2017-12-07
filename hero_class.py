@@ -10,7 +10,7 @@ class Hero:
         self.canvas = canvas
         self.img = img
         self.load = pygame.image.load(self.img)
-
+    """Allows the player to jump"""
     def jumpable(self, x, y, floor):
         self.x += x
         if (floor - 100) < (self.y + y):
@@ -18,8 +18,6 @@ class Hero:
             if self.y == floor - 110:
                 if self.y < floor:
                     self.y += 10
-        #elif self.y < floor and (self.y > floor - 110):
-            #self.y += + 10
         return self.x, self.y
 
     """lets the snowman and penguin kill eachother"""
@@ -34,6 +32,7 @@ class Hero:
             if int(self.x) <= int(x + 50):
                 if int(self.x) >= int(x - 50):
                     return 2
+
     """ends the game if the penguin dies"""
     def game_over(self):
         if self.y <= -100:

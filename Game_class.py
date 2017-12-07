@@ -50,10 +50,11 @@ while not crashed:
             if event.key == pygame.K_RIGHT:
                 x_change = 5
             if y >= (floor - 10):
-                    if event.key == pygame.K_SPACE:
-                        if not jump:
-                            y_change = -10
-
+                if event.key == pygame.K_SPACE:
+                    if not jump:
+                        y_change = -10
+                    else:
+                        y_change = 10
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 x_change = 0
