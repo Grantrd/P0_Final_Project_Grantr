@@ -1,3 +1,11 @@
+######################################################################
+# Author: Rodney Grant
+# Username: GrantR
+#
+# Assignment: P0_Final
+#
+# Purpose: To demonstrate my knowledge of programming
+# ######################################################################
 import pygame
 from pygame import *
 from hero_class import*
@@ -69,15 +77,25 @@ while not crashed:
         hero.y = floor
 
     """platforms, in progress"""
-    #platforms = []
     one = platform_class.Platform(324, 328, 185, gameDisplay)
     two = platform_class.Platform(75, 407, 188, gameDisplay)
-    #platforms.append(one)
-    #platforms.append(two)
-    if one.x <= hero.x <= (one.x + one.length) and hero.y <= one.y:
-        floor = one.solid(hero.x, hero.y, floor)
-    if two.x <= hero.x <= (two.x + two.length) and hero.y <= two.y :
-        floor = two.solid(hero.x, hero.y, floor)
+    if one.x <= hero.x:
+        if hero.x <= (one.x + one.length):
+            if hero .y <= one.y:
+                floor = one.solid(hero.x, hero.y, floor)
+            else:
+                floor = int(display_height * .84)
+        else:
+            floor = int(display_height * .84)
+
+    elif two.x <= hero.x:
+        if hero.x <= (two.x + two.length):
+            if hero.y <= two.y:
+                floor = two.solid(hero.x, hero.y, floor)
+            else:
+                floor = int(display_height * .84)
+        else:
+            floor = int(display_height * .84)
     else:
         floor = int(display_height * .84)
     """gameScreen"""

@@ -1,3 +1,11 @@
+######################################################################
+# Author: Rodney Grant
+# Username: GrantR
+#
+# Assignment: P0_Final
+#
+# Purpose: To demonstrate my knowledge of programming
+# ######################################################################
 from hero_class import*
 from pygame import *
 
