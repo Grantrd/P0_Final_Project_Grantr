@@ -31,7 +31,7 @@ clock = pygame.time.Clock()
 floor = int(.84 * display_height)
 
 """enemy - to be class"""
-hero = platform_class.Hero('animal.png', gameDisplay, floor)
+hero = Hero('animal.png', gameDisplay, floor)
 snowman = Enemy('enemy.png', gameDisplay, display_height)
 """setup screen"""
 x = int(display_width * 0.45)
@@ -45,7 +45,6 @@ crashed = False
 
 while not crashed:
     background = pygame.image.load('background2.png').convert()
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
@@ -55,7 +54,7 @@ while not crashed:
                     x_change = -5
             if event.key == pygame.K_RIGHT:
                     x_change = 5
-            if y >= (floor - 10):
+            if hero.y >= (floor - 10):
                 if event.key == pygame.K_SPACE:
                     if not jump:
                         y_change = -10
@@ -68,56 +67,40 @@ while not crashed:
                 if jump:
                     y_change = 5
 
-    """character jumping and moving"""
-    if hero.y >= floor:
-        jump = False
-    if hero.y < floor:
-        jump = True
-    if hero.y > floor:
-        hero.y = floor
-
     """platforms, in progress"""
     one = platform_class.Platform(324, 328, 185, gameDisplay)
-    two = platform_class.Platform(75, 407, 188, gameDisplay)
-    if one.x <= hero.x:
-        if hero.x <= (one.x + one.length):
-            if hero .y <= one.y:
-                floor = one.solid(hero.x, hero.y, floor)
-            else:
-                floor = int(display_height * .84)
-        else:
-            floor = int(display_height * .84)
+    two = platform_class.Platform(77, 407, 186, gameDisplay)
 
-    elif two.x <= hero.x:
-        if hero.x <= (two.x + two.length):
-            if hero.y <= two.y:
-                floor = two.solid(hero.x, hero.y, floor)
-            else:
-                floor = int(display_height * .84)
-        else:
-            floor = int(display_height * .84)
-    else:
-        floor = int(display_height * .84)
     """gameScreen"""
+    hero.display()
+    snowman.display(snowman.x)
+    snowman.track(hero.x)
 
     """background"""
     gameDisplay.fill(white)
     gameDisplay.blit(background, [0, 0])
-    """platform"""
-    one.draw(black, 5)
-    two.draw(black, 5)
-
-    """actors... Acting"""
-    hero.jumpable(x_change, y_change, floor)
     hero.display()
     snowman.display(snowman.x)
     snowman.track(hero.x)
+
+    """platform"""
+    one.draw(white, 5)
+    two.draw(white, 5)
+
+    """actors... Acting"""
+    floor = hero.gravity(two)[1]
+    print(floor)
+    #print(hero.y)
+    hero.jumpable(x_change, y_change, hero.gravity(two)[1])
+    hero.gravity(two)
+    jump = hero.gravity(two)[0]
     if hero.crash(snowman.x, snowman.y) == 1:
         hero.y = -100
         floor = -100
     elif hero.crash(snowman.x, snowman.y) == 2:
-       snowman.y = -100
+        snowman.y = -100
     crashed = hero.game_over()
+
     """refresh screen"""
     pygame.display.update()
 
