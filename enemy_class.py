@@ -1,3 +1,11 @@
+######################################################################
+# Author: Rodney Grant
+# Username: GrantR
+#
+# Assignment: P0_Final
+#
+# Purpose: To demonstrate my knowledge of programming and make a fun Mario Clone
+# ###############################################################################
 import pygame
 
 class Enemy:

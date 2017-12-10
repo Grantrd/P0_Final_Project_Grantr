@@ -4,8 +4,8 @@
 #
 # Assignment: P0_Final
 #
-# Purpose: To demonstrate my knowledge of programming
-# ######################################################################
+# Purpose: To demonstrate my knowledge of programming and make a fun Mario Clone
+# ###############################################################################
 from enemy_class import *
 import pygame
 import platform_class
