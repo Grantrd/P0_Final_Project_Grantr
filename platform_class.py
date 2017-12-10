@@ -28,7 +28,10 @@ class Platform:
     """Makes the floor solid"""
     def solid(self, x, y):
         #floor = 504
-        if self.x < x < (self.x + self.length) and y <= self.y:
+        if self.x > x > (self.x + self.length) and y < self.y:
+            floor = 504
+            print("Error")
+        elif self.x < x < (self.x + self.length) and y <= self.y:
             floor = self.y
             #print(True)
         else:

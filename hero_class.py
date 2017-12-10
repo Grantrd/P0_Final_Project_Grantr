@@ -10,6 +10,7 @@ from enemy_class import *
 import pygame
 import platform_class
 
+
 class Hero:
 
     def __init__(self, img, canvas,  floor):
@@ -41,21 +42,6 @@ class Hero:
             if int(self.x) <= int(x + 50):
                 if int(self.x) >= int(x - 50):
                     return 2
-
-    def gravity(self, platform):
-        floors = platform.solid(self.x, self.y)
-        jump = False
-
-        if self.y > floors:
-            self.y = floors
-
-        if self.y >= floors:
-            jump = False
-
-        if self.y < floors:
-            jump = True
-
-        return jump, floors
 
     """ends the game if the penguin dies"""
     def game_over(self):
