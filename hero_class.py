@@ -19,6 +19,7 @@ class Hero:
         self.canvas = canvas
         self.img = img
         self.load = pygame.image.load(self.img)
+
     """Allows the player to jump"""
     def jumpable(self, x, y, floor):
         self.x += x
@@ -50,6 +51,7 @@ class Hero:
         else:
             crashed = False
         return crashed
+
     """Draws the hero on screen"""
     def display(self):
         self.canvas.blit(self.load, (self.x, self.y))

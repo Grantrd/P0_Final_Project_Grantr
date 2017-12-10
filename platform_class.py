@@ -17,6 +17,7 @@ class Platform:
         self.length = length
         self.canvas = canvas
         self.draw((130, 130, 130), 5)
+
     """sets the starting point of drawing it"""
     def start(self):
         return ((self.x + 70), (self.y + 85))
