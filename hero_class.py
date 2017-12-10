@@ -28,7 +28,6 @@ class Hero:
             if self.y == floor - 130:
                 if self.y < floor:
                     self.y += 10
-                    print(floor)
         return self.x, self.y
 
     """lets the snowman and penguin kill each other"""
