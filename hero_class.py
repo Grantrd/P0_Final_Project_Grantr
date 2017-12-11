@@ -31,14 +31,31 @@ class Hero:
         print(msg)
 
     def hero_test_suite(self):
-        self.x = 600
-        self.y = 504
+        x = 600
+        y = 504
+        self.x = x
+        self.y = y
         self.testit(self.jumpable(90, -100, 504) == (690, 404))
-        self.x = 600
-        self.y = 504
-        self.testit(self.jumpable(100, -130, 504) == (700, 374))
-        self.testit(self.jumpable(100, 100, 504) == (200, 90))
-        self.testit(self.jumpable(100, 100, 504) == (200, 90))
+        self.x = x
+        self.y = y
+        self.testit(self.jumpable(-100, -120, 504) == (500, 384))
+        self.x = x
+        self.y = y
+        self.testit(self.jumpable(100, 100, 504) == (700, 504))
+        self.x = x
+        self.y = y
+        self.testit(self.jumpable(-200, -200, 504) == (400, 304))
+        self.x = x
+        self.y = y
+        self.testit(self.crash(600, 504) == 1)
+        self.x = x
+        self.y = y-70
+        self.testit(self.crash(550, 504) == 2)
+        self.x = x
+        self.y = y
+        self.testit(self.crash(600, 504) == 1)
+
+
     """Allows the player to jump"""
     def jumpable(self, x, y, floor):
         self.x += x
