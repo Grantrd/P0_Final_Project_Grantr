@@ -53,9 +53,13 @@ class Hero:
         self.testit(self.crash(550, 504) == 2)
         self.x = x
         self.y = y
-        self.testit(self.crash(600, 504) == 1)
-
-
+        self.testit(self.crash(600, 404) == 2)
+        self.x = x
+        self.y = -100
+        self.testit(self.game_over() == True)
+        self.x = x
+        self.y = 100
+        self.testit(self.game_over() == False)
     """Allows the player to jump"""
     def jumpable(self, x, y, floor):
         self.x += x
