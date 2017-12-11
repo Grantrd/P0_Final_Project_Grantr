@@ -9,6 +9,8 @@
 
 from Game_class import *
 from hero_class import *
+from platform_class import *
+from enemy_class import *
 
 
 def testit(did_pass):
@@ -24,6 +26,8 @@ def testit(did_pass):
 
 
 def game_test_suite():
-    hero.crash(100, 200) == 1
+    hero = Hero('animal.png', None, 504)
+    testit(hero.crash(100, 200) == 1)
+
 
 

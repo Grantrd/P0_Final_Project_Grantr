@@ -6,12 +6,77 @@
 #
 # Purpose: To demonstrate my knowledge of programming and make a fun Mario Clone
 # ###############################################################################
-import pygame
 from pygame import *
 from hero_class import*
 import platform_class
 from enemy_class import *
 import unittest
+
+"""Method Allows the game to take player input and use it to move the player"""
+def player_input(event, floor, hero, jump, x_change, y_change):
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            x_change = -5
+        if event.key == pygame.K_RIGHT:
+            x_change = 5
+        if hero.y >= (floor - 10):
+            if event.key == pygame.K_SPACE:
+                if not jump:
+                    y_change = -10
+                else:
+                    y_change = 10
+
+    elif event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            x_change = 0
+        if event.key == pygame.K_SPACE:
+            if jump:
+                y_change = 5
+    return x_change, y_change
+
+
+def gravity(floor, hero, jump, x_change, y_change):
+    hero.jumpable(x_change, y_change, floor)
+    if hero.y >= floor:
+        jump = False
+    if hero.y < floor:
+        jump = True
+    if hero.y > floor:
+        hero.y = floor
+    return jump
+
+
+def winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, white, win):
+    if floor == one.y:
+        if 440 > hero.x > 400:
+            if 280 > hero.y:
+                gameDisplay.fill(white)
+                gameDisplay.blit(textsurface, (int(display_width / 6 - 110), int(display_height / 2)))
+                win = True
+    return win
+
+
+def lose(display_width, floor, hero, snowman):
+    if hero.crash(snowman.x, snowman.y) == 1:
+        hero.y = -100
+        floor = -100
+    elif hero.crash(snowman.x, snowman.y) == 2:
+        snowman.y = -100
+    if hero.x > display_width:
+        hero.y = -100
+    if hero.x < -65:
+        hero.y = -100
+    return floor
+
+
+def platform(floor, hero, one, two):
+    if one.x < hero.x < (one.x + one.length) and hero.y <= one.y:
+        floor = one.y
+    elif two.x < hero.x < (two.x + two.length) and hero.y <= two.y:
+        floor = two.y
+    else:
+        floor = 504
+    return floor
 
 
 def main():
@@ -57,23 +122,7 @@ def main():
             if event.type == pygame.QUIT:
                 crashed = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    x_change = -5
-                if event.key == pygame.K_RIGHT:
-                    x_change = 5
-                if hero.y >= (floor - 10):
-                    if event.key == pygame.K_SPACE:
-                        if not jump:
-                            y_change = -10
-                        else:
-                            y_change = 10
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    x_change = 0
-                if event.key == pygame.K_SPACE:
-                    if jump:
-                        y_change = 5
+            x_change, y_change = player_input(event, floor, hero, jump, x_change, y_change)
 
         """platforms, in progress"""
         one = platform_class.Platform(324, 328, 185, gameDisplay)
@@ -97,46 +146,20 @@ def main():
         hero.display()
 
         """actors... Acting"""
-        hero.jumpable(x_change, y_change, floor)
-        if hero.y >= floor:
-            jump = False
-
-        if hero.y < floor:
-            jump = True
-
-        if hero.y > floor:
-            hero.y = floor
+        jump = gravity(floor, hero, jump, x_change, y_change)
 
         """Selects the necessary platform to make solid"""
-        if one.x < hero.x < (one.x + one.length) and hero.y <= one.y:
-            floor = one.y
-        elif two.x < hero.x < (two.x + two.length) and hero.y <= two.y:
-            floor = two.y
-        else:
-            floor = 504
+        floor = platform(floor, hero, one, two)
 
         """Kills the enemy, or the penguin"""
-        if hero.crash(snowman.x, snowman.y) == 1:
-            hero.y = -100
-            floor = -100
-        elif hero.crash(snowman.x, snowman.y) == 2:
-            snowman.y = -100
-        if hero.x > display_width:
-            hero.y = -100
-        if hero.x < -65:
-            hero.y = -100
+        floor = lose(display_width, floor, hero, snowman)
 
         """ends the game loop"""
         crashed = hero.game_over()
 
 
         """Allows fish coin collecting and winning"""
-        if floor == one.y:
-            if 425 > hero.x > 410:
-                if 285 > hero.y:
-                    gameDisplay.fill(white)
-                    gameDisplay.blit(textsurface, (int(display_width/6 - 110), int(display_height/2)))
-                    win = True
+        win = winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, white, win)
 
         """refresh screen"""
         pygame.display.update()
