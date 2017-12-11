@@ -135,7 +135,7 @@ def main():
             if 425 > hero.x > 410:
                 if 285 > hero.y:
                     gameDisplay.fill(white)
-                    gameDisplay.blit(textsurface, (int(display_width/2 - 110), int(display_height/2)))
+                    gameDisplay.blit(textsurface, (int(display_width/6 - 110), int(display_height/2)))
                     win = True
 
         """refresh screen"""
