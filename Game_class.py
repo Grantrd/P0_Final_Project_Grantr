@@ -159,7 +159,7 @@ def main():
 
 
         """Allows fish coin collecting and winning"""
-        win = winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, white, win)
+        win = winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, green, win)
 
         """refresh screen"""
         pygame.display.update()
@@ -172,9 +172,13 @@ def main():
         clock.tick(60)
 
     pygame.quit()
-    """end of game loop"""
-    hero.hero_test_suite()
 
+    """end of game loop"""
+
+    hero.hero_test_suite()
+    one.platform_test_suite()
+    two.platform_test_suite()
+    snowman.enemy_test_suite()
 
 main()
 
