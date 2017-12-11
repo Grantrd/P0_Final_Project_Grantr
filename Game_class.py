@@ -13,13 +13,15 @@ from enemy_class import *
 import unittest
 
 """Method Allows the game to take player input and use it to move the player"""
-def player_input(event, floor, hero, jump, x_change, y_change):
+
+
+def player_input(event, floor, hero_y, jump, x_change, y_change):
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT:
             x_change = -5
         if event.key == pygame.K_RIGHT:
             x_change = 5
-        if hero.y >= (floor - 10):
+        if hero_y >= (floor - 10):
             if event.key == pygame.K_SPACE:
                 if not jump:
                     y_change = -10
@@ -44,6 +46,9 @@ def gravity(floor, hero, jump, x_change, y_change):
     if hero.y > floor:
         hero.y = floor
     return jump
+
+def game_test_suite():
+
 
 
 def winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, white, win):
@@ -122,7 +127,7 @@ def main():
             if event.type == pygame.QUIT:
                 crashed = True
 
-            x_change, y_change = player_input(event, floor, hero, jump, x_change, y_change)
+            x_change, y_change = player_input(event, floor, hero.y, jump, x_change, y_change)
 
         """platforms, in progress"""
         one = platform_class.Platform(324, 328, 185, gameDisplay)
@@ -179,7 +184,7 @@ def main():
     one.platform_test_suite()
     two.platform_test_suite()
     snowman.enemy_test_suite()
-
+    game_test_suite()
 main()
 
 if __name__ == '__main__':
