@@ -6,6 +6,8 @@
 #
 # Purpose: To demonstrate my knowledge of programming and make a fun Mario Clone
 # ###############################################################################
+import sys
+from sys import _getframe
 from enemy_class import *
 import pygame
 import platform_class
@@ -19,6 +21,18 @@ class Hero:
         self.canvas = canvas
         self.img = img
         self.load = pygame.image.load(self.img)
+
+    def testit(self, did_pass):
+
+        linenum = sys._getframe(1).f_lineno                 # Get the caller's line number.
+        if did_pass:
+            msg = "Test at line {0} ok.".format(linenum)
+        else:
+            msg = ("Test at line {0} FAILED.".format(linenum))
+        print(msg)
+
+    def hero_test_suite(self):
+        self.testit(self.jumpable(100, 100, 504) == (200, 90))
 
     """Allows the player to jump"""
     def jumpable(self, x, y, floor):

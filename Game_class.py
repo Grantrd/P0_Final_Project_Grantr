@@ -173,6 +173,7 @@ def main():
 
     pygame.quit()
     """end of game loop"""
+    hero.hero_test_suite()
 
 
 main()
