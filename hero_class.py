@@ -34,7 +34,9 @@ class Hero:
         self.x = 600
         self.y = 504
         self.testit(self.jumpable(90, -100, 504) == (690, 404))
-        self.testit(self.jumpable(100, 100, 504) == (200, 90))
+        self.x = 600
+        self.y = 504
+        self.testit(self.jumpable(100, -130, 504) == (700, 374))
         self.testit(self.jumpable(100, 100, 504) == (200, 90))
         self.testit(self.jumpable(100, 100, 504) == (200, 90))
     """Allows the player to jump"""
