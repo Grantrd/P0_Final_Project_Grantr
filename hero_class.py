@@ -23,7 +23,6 @@ class Hero:
         self.load = pygame.image.load(self.img)
 
     def testit(self, did_pass):
-
         linenum = sys._getframe(1).f_lineno                 # Get the caller's line number.
         if did_pass:
             msg = "Test at line {0} ok.".format(linenum)
@@ -32,8 +31,12 @@ class Hero:
         print(msg)
 
     def hero_test_suite(self):
+        self.x = 600
+        self.y = 504
+        self.testit(self.jumpable(90, -100, 504) == (690, 404))
         self.testit(self.jumpable(100, 100, 504) == (200, 90))
-
+        self.testit(self.jumpable(100, 100, 504) == (200, 90))
+        self.testit(self.jumpable(100, 100, 504) == (200, 90))
     """Allows the player to jump"""
     def jumpable(self, x, y, floor):
         self.x += x
