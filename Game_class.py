@@ -56,21 +56,33 @@ def testit(did_pass):
         msg = ("Game Test at line {0} FAILED.".format(linenum))
     print(msg)
 
-def game_test_suite(hero):
+def game_test_suite(hero, gameDisplay, textsurface, one):
     hero.y = 504
     hero.x = 600
     testit(gravity(504, hero, True, -10, 0) == False)
     testit(gravity(504, hero, True, 0, -10) == True)
     testit(gravity(504, hero, True, 500, 0) == False)
     testit(gravity(504, hero, True, 0, 300) == True)
+    testit(winner(800, 600, 504, gameDisplay, hero, one, textsurface, (255, 255, 255)) == False)
+    hero.x = 430
+    hero.y = 217
+    testit(winner(800, 600, 504, gameDisplay, hero, one, textsurface, (255, 255, 255)) == True)
+    testit()
 
-def winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, white, win):
+
+def winner(display_width, display_height, floor, gameDisplay, hero, one, textsurface, white):
     if floor == one.y:
         if 440 > hero.x > 400:
             if 280 > hero.y:
                 gameDisplay.fill(white)
                 gameDisplay.blit(textsurface, (int(display_width / 6 - 110), int(display_height / 2)))
                 win = True
+            else:
+                win = False
+        else:
+            win = False
+    else:
+        win = False
     return win
 
 
@@ -177,8 +189,8 @@ def main():
 
 
         """Allows fish coin collecting and winning"""
-        win = winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, green, win)
-
+        win = winner(display_width, display_height, floor, gameDisplay, hero, one, textsurface, green)
+        print(win, hero.x, hero.y, floor)
         """refresh screen"""
         pygame.display.update()
 
@@ -197,7 +209,7 @@ def main():
     one.platform_test_suite()
     two.platform_test_suite()
     snowman.enemy_test_suite()
-    game_test_suite(hero)
+    game_test_suite(hero, gameDisplay, textsurface, one)
 
 
 main()
