@@ -47,9 +47,22 @@ def gravity(floor, hero, jump, x_change, y_change):
         hero.y = floor
     return jump
 
-def game_test_suite():
 
+def testit(did_pass):
+    linenum = sys._getframe(1).f_lineno                 # Get the caller's line number.
+    if did_pass:
+        msg = "Game Test at line {0} ok.".format(linenum)
+    else:
+        msg = ("Game Test at line {0} FAILED.".format(linenum))
+    print(msg)
 
+def game_test_suite(hero):
+    hero.y = 504
+    hero.x = 600
+    testit(gravity(504, hero, True, -10, 0) == False)
+    testit(gravity(504, hero, True, 0, -10) == True)
+    testit(gravity(504, hero, True, 500, 0) == False)
+    testit(gravity(504, hero, True, 0, 300) == True)
 
 def winner(display_height, display_width, floor, gameDisplay, hero, one, textsurface, white, win):
     if floor == one.y:
@@ -184,7 +197,9 @@ def main():
     one.platform_test_suite()
     two.platform_test_suite()
     snowman.enemy_test_suite()
-    game_test_suite()
+    game_test_suite(hero)
+
+
 main()
 
 if __name__ == '__main__':
