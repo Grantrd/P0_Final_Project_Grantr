@@ -227,7 +227,6 @@ def main():
     pygame.quit()
 
     """end of game loop"""
-
     hero.hero_test_suite()
     one.platform_test_suite()
     two.platform_test_suite()
@@ -237,5 +236,3 @@ def main():
 
 main()
 
-if __name__ == '__main__':
-    unittest.main()
